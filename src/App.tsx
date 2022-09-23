@@ -1,12 +1,10 @@
 import { Stack } from "@chakra-ui/react";
-import Banner from "./components/Banner";
-import NavBar from "./components/NavBar";
+import Home from "./pages/Home";
 
 function App() {
   return (
     <Stack className="App">
-      <NavBar />
-      <Banner />
+      <Home />
     </Stack>
   );
 }

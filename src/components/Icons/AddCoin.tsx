@@ -11,9 +11,16 @@ import {
   useDisclosure,
   Text,
 } from "@chakra-ui/react";
+import { useState } from "react";
 
 function AddCoin() {
   const { isOpen, onOpen, onClose } = useDisclosure();
+
+  const [selectedAmountCoins, setSelectedAmountCoins] = useState<boolean>(true);
+
+  const handleAddCoin = () => {
+    setSelectedAmountCoins(!selectedAmountCoins);
+  };
 
   return (
     <>
