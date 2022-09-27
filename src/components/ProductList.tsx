@@ -7,10 +7,11 @@ function ProductList() {
   return (
     <Stack justify="center" align="center">
       <List
-        display={"grid"}
-        gridTemplateColumns={"repeat(auto-fill,300px)"}
-        gap={2}
-        maxW={1000}
+        display="grid"
+        gridTemplateColumns="repeat( auto-fit, minmax(280px, 1fr) )"
+        gap={6}
+        maxW={1200}
+        width={"100%"}
       >
         {products.map((product) => {
           return <ProductCard key={product._id} productInfo={product} />;

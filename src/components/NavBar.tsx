@@ -3,11 +3,17 @@ import AddCoin from "./Icons/AddCoin";
 import Logo from "./Icons/Logo";
 import MyCoins from "./MyCoins";
 import ProfileImage from "../assets/profile.jpg";
+import { useContext } from "react";
+import { CoinsContext } from "../context/CoinsContext";
 
 function NavBar() {
+  const userData = useContext(CoinsContext);
   return (
     <Stack
+      position={"sticky"}
+      top={0}
       padding=".5rem 2rem"
+      background={"white"}
       direction="row"
       align={"center"}
       justifyContent="space-between"
@@ -15,7 +21,7 @@ function NavBar() {
       zIndex={2}
     >
       <Logo />
-      <MyCoins coins={400} />
+      <MyCoins coins={userData?.points} />
       <Stack direction={"row"} align={"center"} gap={2}>
         <AddCoin />
         <Image

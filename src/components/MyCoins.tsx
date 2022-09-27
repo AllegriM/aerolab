@@ -1,7 +1,7 @@
 import { Stack, Text } from "@chakra-ui/react";
 import Coin from "./Icons/Coin";
 
-function MyCoins({ coins }: { coins: number }) {
+function MyCoins({ coins }: { coins: number | undefined }) {
   return (
     <Stack
       direction={"row"}

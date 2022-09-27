@@ -14,3 +14,12 @@ export interface Product {
   img: { hdUrl: string; url: string };
   category: string;
 }
+
+export interface UserData {
+  createData: string;
+  name: string;
+  points: number;
+  redeemHistory: [];
+  __v: number;
+  __id: string;
+}
