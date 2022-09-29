@@ -23,3 +23,8 @@ export interface UserData {
   __v: number;
   __id: string;
 }
+
+export interface CoinsRedeemProps {
+  coins: number;
+  setCoins: React.Dispatch<React.SetStateAction<number>>;
+}

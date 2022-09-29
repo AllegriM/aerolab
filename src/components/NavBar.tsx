@@ -3,11 +3,10 @@ import AddCoin from "./Icons/AddCoin";
 import Logo from "./Icons/Logo";
 import MyCoins from "./MyCoins";
 import ProfileImage from "../assets/profile.jpg";
-import { useContext } from "react";
-import { CoinsContext } from "../context/CoinsContext";
+import { useCoinsContext } from "../context/CoinsContext";
 
 function NavBar() {
-  const userData = useContext(CoinsContext);
+  const userData = useCoinsContext();
   return (
     <Stack
       position={"sticky"}

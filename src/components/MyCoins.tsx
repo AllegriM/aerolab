@@ -6,10 +6,13 @@ function MyCoins({ coins }: { coins: number | undefined }) {
     <Stack
       direction={"row"}
       align="center"
+      justify={"center"}
       px={2}
       border="1px solid lightgray"
-      bg={"blackAlpha.200"}
+      bg={"gray.200"}
+      maxW={"120px"}
       borderRadius={20}
+      zIndex={2}
     >
       <Coin />
       <Text fontWeight={700}>{coins}</Text>

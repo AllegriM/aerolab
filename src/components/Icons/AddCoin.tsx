@@ -12,14 +12,21 @@ import {
   Text,
 } from "@chakra-ui/react";
 import { useState } from "react";
+import { requestPoints } from "../../services/postRedeemPoints";
+import { CoinsRedeemProps } from "../../types";
+import CoinRedeemOptions from "../CoinRedeemOptions";
+
+export const COIN_OPTIONS = [1000, 5000, 7500];
 
 function AddCoin() {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const [coinsAmount, setCoinsAmount] = useState<CoinsRedeemProps["coins"]>(
+    COIN_OPTIONS[0]
+  );
 
-  const [selectedAmountCoins, setSelectedAmountCoins] = useState<boolean>(true);
-
-  const handleAddCoin = () => {
-    setSelectedAmountCoins(!selectedAmountCoins);
+  const redeemCoins = () => {
+    console.log(coinsAmount);
+    requestPoints(coinsAmount);
   };
 
   return (
@@ -71,15 +78,11 @@ function AddCoin() {
               Add coins at your acount, selecting the score below and push Add
               coins button
             </Text>
-            <Stack mt={4} direction={"row"} justifyContent={"space-between"}>
-              <Button variant={"solid"}>1000</Button>
-              <Button variant={"solid"}>5000</Button>
-              <Button variant={"solid"}>7500</Button>
-            </Stack>
+            <CoinRedeemOptions setCoins={setCoinsAmount} coins={coinsAmount} />
           </ModalBody>
 
           <ModalFooter pt={2} px={6}>
-            <Button colorScheme="blue" w={"100%"}>
+            <Button onClick={redeemCoins} colorScheme="blue" w={"100%"}>
               Add Coins
             </Button>
           </ModalFooter>

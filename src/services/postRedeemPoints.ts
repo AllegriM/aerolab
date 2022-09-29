@@ -1,6 +1,6 @@
 import { FETCH_URL } from "./getProducts";
 
-export const requestPoints = async () => {
+export const requestPoints = async (coinsAmount: number) => {
   const data = await fetch(`${FETCH_URL}/user/points`, {
     method: "POST",
     headers: {
@@ -8,7 +8,8 @@ export const requestPoints = async () => {
       Accept: "application/json",
       Authorization: import.meta.env.VITE_API_TOKEN,
     },
+    body: JSON.stringify({ amount: coinsAmount }),
   });
-  const products = await data.json();
-  return products;
+  const redeemCoins = await data.json();
+  return redeemCoins;
 };

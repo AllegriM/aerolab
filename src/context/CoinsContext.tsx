@@ -1,5 +1,5 @@
-import { createContext, useContext } from "react";
-import useUserData from "../hooks/useUserData";
+import { createContext, useContext, useEffect, useState } from "react";
+import { getUserData } from "../services/getUserData";
 import { UserData } from "../types";
 
 interface CoinsContextProviderProps {
@@ -14,7 +14,10 @@ export const useCoinsContext = () => {
 };
 
 function CoinsContextProvider({ children }: CoinsContextProviderProps) {
-  const userData = useUserData();
+  const [userData, setUserData] = useState<UserData | null>(null);
+  useEffect(() => {
+    getUserData().then((data) => setUserData(data));
+  }, []);
 
   return (
     // value should have userData

@@ -1,11 +1,24 @@
-import { Image, Text, ListItem, Stack, Heading } from "@chakra-ui/react";
+import {
+  Image,
+  Text,
+  ListItem,
+  Stack,
+  Heading,
+  Button,
+} from "@chakra-ui/react";
 import { useState } from "react";
+import { requestRedeemProducts } from "../services/postRedeemProduct";
 import { Product } from "../types";
 import BuyBlue from "./Icons/BuyBlue";
 import BuyWhite from "./Icons/BuyWhite";
+import MyCoins from "./MyCoins";
 
 function ProductCard({ productInfo }: { productInfo: Product }) {
   const [isHovered, setIsHovered] = useState<boolean>(false);
+
+  const buyProduct = () => {
+    requestRedeemProducts(productInfo._id);
+  };
 
   return (
     <ListItem
@@ -18,7 +31,28 @@ function ProductCard({ productInfo }: { productInfo: Product }) {
       p={2}
       cursor={"pointer"}
     >
-      {isHovered ? <BuyBlue /> : <BuyWhite />}
+      <Stack
+        display={isHovered ? "block" : "none"}
+        pos={"absolute"}
+        top={0}
+        left={0}
+        h={"100%"}
+        w={"100%"}
+        bg={isHovered ? "rgba(48, 216, 250, .80)" : "transparent"}
+      >
+        <Stack
+          h={"100%"}
+          direction={"column"}
+          justify={"center"}
+          align={"center"}
+        >
+          <MyCoins coins={productInfo.cost} />
+          <Button onClick={buyProduct} w={"70%"} borderRadius={"50px"}>
+            Redeem
+          </Button>
+        </Stack>
+      </Stack>
+      {isHovered ? <BuyWhite /> : <BuyBlue />}
       <Image
         src={productInfo.img.hdUrl}
         alt={productInfo.name}
