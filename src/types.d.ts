@@ -28,3 +28,13 @@ export interface CoinsRedeemProps {
   coins: number;
   setCoins: React.Dispatch<React.SetStateAction<number>>;
 }
+
+export interface CoinsContextProviderProps {
+  children: JSX.Element | JSX.Element[];
+}
+
+export interface CoinsContextProps {
+  userData: UserData | null;
+  spendCoinsToRedeem: (amount: number) => void;
+  redeemCoins: (amount: number) => void;
+}

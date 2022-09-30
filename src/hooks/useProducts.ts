@@ -4,12 +4,17 @@ import { useEffect, useState } from "react";
 
 const useProducts = () => {
   const [products, setProducts] = useState<Product[]>([]);
-
+  const [status, setStatus] = useState<"pending" | "resolved" | "reject">(
+    "pending"
+  );
   useEffect(() => {
-    getProducts().then((products) => setProducts(products));
+    getProducts()
+      .then((products) => setProducts(products))
+      .catch(() => console.log("reject"))
+      .finally(() => setStatus("resolved"));
   }, []);
 
-  return products;
+  return { products, status };
 };
 
 export default useProducts;

@@ -1,4 +1,4 @@
-import { Stack, Image } from "@chakra-ui/react";
+import { Stack, Image, Text } from "@chakra-ui/react";
 import AddCoin from "./Icons/AddCoin";
 import Logo from "./Icons/Logo";
 import MyCoins from "./MyCoins";
@@ -6,7 +6,8 @@ import ProfileImage from "../assets/profile.jpg";
 import { useCoinsContext } from "../context/CoinsContext";
 
 function NavBar() {
-  const userData = useCoinsContext();
+  const context = useCoinsContext();
+
   return (
     <Stack
       position={"sticky"}
@@ -20,9 +21,10 @@ function NavBar() {
       zIndex={2}
     >
       <Logo />
-      <MyCoins coins={userData?.points} />
+      <MyCoins coins={context?.userData?.points} />
       <Stack direction={"row"} align={"center"} gap={2}>
-        <AddCoin />
+        <Text>My Products</Text>
+        <AddCoin addCoins={context?.redeemCoins} />
         <Image
           src={ProfileImage}
           alt="profileImage"

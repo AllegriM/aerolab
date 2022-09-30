@@ -13,12 +13,12 @@ import {
 } from "@chakra-ui/react";
 import { useState } from "react";
 import { requestPoints } from "../../services/postRedeemPoints";
-import { CoinsRedeemProps } from "../../types";
+import { CoinsContextProps, CoinsRedeemProps } from "../../types";
 import CoinRedeemOptions from "../CoinRedeemOptions";
 
 export const COIN_OPTIONS = [1000, 5000, 7500];
 
-function AddCoin() {
+function AddCoin({ addCoins }: CoinsContextProps["redeemCoins"]) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [coinsAmount, setCoinsAmount] = useState<CoinsRedeemProps["coins"]>(
     COIN_OPTIONS[0]
@@ -26,6 +26,7 @@ function AddCoin() {
 
   const redeemCoins = () => {
     console.log(coinsAmount);
+    addCoins(coinsAmount);
     requestPoints(coinsAmount);
   };
 

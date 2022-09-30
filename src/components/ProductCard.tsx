@@ -8,15 +8,20 @@ import {
 } from "@chakra-ui/react";
 import { useState } from "react";
 import { requestRedeemProducts } from "../services/postRedeemProduct";
-import { Product } from "../types";
+import { CoinsContextProps, Product } from "../types";
 import BuyBlue from "./Icons/BuyBlue";
 import BuyWhite from "./Icons/BuyWhite";
 import MyCoins from "./MyCoins";
 
-function ProductCard({ productInfo }: { productInfo: Product }) {
+interface ProductCardProp {
+  productInfo: Product;
+  redeemProduct: CoinsContextProps["spendCoinsToRedeem"];
+}
+function ProductCard({ productInfo, redeemProduct }: ProductCardProp) {
   const [isHovered, setIsHovered] = useState<boolean>(false);
 
   const buyProduct = () => {
+    redeemProduct(productInfo.cost);
     requestRedeemProducts(productInfo._id);
   };
 
