@@ -7,7 +7,6 @@ const useUserData = () => {
 
   useEffect(() => {
     getUserData().then((data) => setUserData(data));
-    console.log(userData?.points);
   }, [userData?.points]);
 
   return userData;

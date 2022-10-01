@@ -14,9 +14,11 @@
     "@emotion/react": "^11.10.4",
     "@emotion/styled": "^11.10.4",
     "framer-motion": "^6.5.1",
+    "moment": "^2.29.4",
     "prettier": "^2.7.1",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.4.1"
   },
   "devDependencies": {
     "@types/react": "^18.0.17",

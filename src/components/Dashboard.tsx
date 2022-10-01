@@ -4,9 +4,10 @@ import { FilterByCategory, FilterByPrice } from "./types";
 interface Props {
   active: FilterByPrice;
   onChange: (filter: FilterByPrice) => void;
+  onChangeCategory: (category: FilterByCategory) => void;
 }
 
-function Dashboard({ active, onChange }: Props) {
+function Dashboard({ active, onChange, onChangeCategory }: Props) {
   const FILTERS: FilterByPrice[] = [
     // Filter.MostRecent,
     FilterByPrice.HighestPrice,
@@ -20,17 +21,28 @@ function Dashboard({ active, onChange }: Props) {
     FilterByCategory.TabletsAndEReaders,
     FilterByCategory.PhoneAccessories,
     FilterByCategory.Phones,
-    FilterByCategory.PCAccessories,
+    FilterByCategory.PCAccesories,
     FilterByCategory.Gaming,
     FilterByCategory.SmartHome,
     FilterByCategory.MonitorsAndTv,
     FilterByCategory.Drones,
   ];
+
+  const selectCategory = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    console.log(e.target.value);
+    onChangeCategory(e.target.value as FilterByCategory);
+  };
+
   return (
     <HStack w={"100%"} justify={"space-between"} py={4}>
       <HStack maxW={"1200px"} w={"100%"} m={"0 auto"}>
         <Text>Filter by</Text>
-        <Select maxW={180} borderColor={"#0DD4FA"} cursor={"pointer"}>
+        <Select
+          onChange={selectCategory}
+          maxW={180}
+          borderColor={"#0DD4FA"}
+          cursor={"pointer"}
+        >
           {FILTER_CATEGORY.map((option) => {
             return (
               <option

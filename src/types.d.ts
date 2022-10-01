@@ -11,6 +11,7 @@ export interface Product {
   _id: string;
   name: string;
   cost: number;
+  createDate: string;
   img: { hdUrl: string; url: string };
   category: string;
 }

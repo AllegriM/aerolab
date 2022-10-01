@@ -33,6 +33,7 @@ function ProductCard({ productInfo, redeemProduct }: ProductCardProp) {
       pos={"relative"}
       boxShadow="rgba(0, 0, 0, 0.24) 0px 3px 8px"
       minH={"310px"}
+      maxW={282}
       p={2}
       cursor={"pointer"}
     >
