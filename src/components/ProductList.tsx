@@ -8,7 +8,9 @@ import { FilterByCategory, FilterByPrice } from "./types";
 
 function ProductList() {
   const { products, status } = useProducts();
-  const data = useCoinsContext();
+  const { spendCoinsToRedeem } = useCoinsContext();
+  const [page, setPage] = useState<number>(1);
+  const MAX_PRODUCTS_PER_PAGE = 16;
   const [category, setCategory] = useState<FilterByCategory>(
     FilterByCategory.All
   );
@@ -18,8 +20,9 @@ function ProductList() {
 
   const filteredCategoryProducts = React.useMemo(() => {
     switch (category) {
-      case "All":
+      case "All": {
         return products;
+      }
       case "Audio":
         return products.filter((product) => product.category === "Audio");
       case "Cameras":
@@ -54,13 +57,12 @@ function ProductList() {
         return products;
     }
   }, [products, category]);
-
-  const filteredPriceProducts = React.useMemo(() => {
+  React.useMemo(() => {
     switch (filter) {
       case "Lowest Price":
-        return filteredCategoryProducts.sort((a, b) => a.cost - b.cost);
+        return filteredCategoryProducts?.sort((a, b) => a.cost - b.cost);
       case "Highest Price":
-        return filteredCategoryProducts.sort((a, b) => b.cost - a.cost);
+        return filteredCategoryProducts?.sort((a, b) => b.cost - a.cost);
       default:
         return products;
     }
@@ -78,6 +80,9 @@ function ProductList() {
             active={filter}
             onChange={setFilter}
             onChangeCategory={setCategory}
+            productsAmount={filteredCategoryProducts.length}
+            page={page}
+            setPage={setPage}
           />
           <List
             display="grid"
@@ -86,15 +91,20 @@ function ProductList() {
             maxW={1200}
             width={"100%"}
           >
-            {filteredCategoryProducts.map((product) => {
-              return (
-                <ProductCard
-                  key={product._id}
-                  productInfo={product}
-                  redeemProduct={data?.spendCoinsToRedeem}
-                />
-              );
-            })}
+            {filteredCategoryProducts
+              ?.slice(
+                (page - 1) * MAX_PRODUCTS_PER_PAGE,
+                (page - 1) * MAX_PRODUCTS_PER_PAGE + MAX_PRODUCTS_PER_PAGE
+              )
+              .map((product) => {
+                return (
+                  <ProductCard
+                    key={product._id}
+                    productInfo={product}
+                    redeemProduct={spendCoinsToRedeem}
+                  />
+                );
+              })}
           </List>
           <Text
             w={"100%"}
@@ -104,7 +114,8 @@ function ProductList() {
             color={"gray.500"}
             textAlign={"center"}
           >
-            {products.length} of {products.length} products
+            {filteredCategoryProducts?.length} of{" "}
+            {filteredCategoryProducts?.length} products
           </Text>
         </>
       )}

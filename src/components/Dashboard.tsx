@@ -1,15 +1,36 @@
-import { Box, HStack, Select, Text } from "@chakra-ui/react";
+import { Box, Button, HStack, Select, Text } from "@chakra-ui/react";
 import { FilterByCategory, FilterByPrice } from "./types";
 
 interface Props {
   active: FilterByPrice;
   onChange: (filter: FilterByPrice) => void;
   onChangeCategory: (category: FilterByCategory) => void;
+  productsAmount: number;
+  page: number;
+  setPage: (page: number) => void;
 }
 
-function Dashboard({ active, onChange, onChangeCategory }: Props) {
+function Dashboard({
+  active,
+  onChange,
+  onChangeCategory,
+  productsAmount,
+  page,
+  setPage,
+}: Props) {
+  // Pagination
+  const TOTAL_PAGES = Math.ceil(productsAmount / 16);
+  const handleNextPage = () => {
+    if (page < TOTAL_PAGES) {
+      setPage(page + 1);
+    }
+  };
+  const handlePrevPage = () => {
+    if (page > 1) {
+      setPage(page - 1);
+    }
+  };
   const FILTERS: FilterByPrice[] = [
-    // Filter.MostRecent,
     FilterByPrice.HighestPrice,
     FilterByPrice.LowestPrice,
   ];
@@ -29,13 +50,18 @@ function Dashboard({ active, onChange, onChangeCategory }: Props) {
   ];
 
   const selectCategory = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    console.log(e.target.value);
     onChangeCategory(e.target.value as FilterByCategory);
   };
 
   return (
-    <HStack w={"100%"} justify={"space-between"} py={4}>
-      <HStack maxW={"1200px"} w={"100%"} m={"0 auto"}>
+    <HStack
+      w={"100%"}
+      maxW={"1200px"}
+      justify={"space-between"}
+      py={4}
+      m={"0 auto"}
+    >
+      <HStack w={"100%"}>
         <Text>Filter by</Text>
         <Select
           onChange={selectCategory}
@@ -48,7 +74,6 @@ function Dashboard({ active, onChange, onChangeCategory }: Props) {
               <option
                 key={option}
                 value={option}
-                // selected={active === option}
                 style={{ cursor: "pointer", padding: "10px" }}
               >
                 {option}
@@ -75,6 +100,57 @@ function Dashboard({ active, onChange, onChangeCategory }: Props) {
             </Box>
           );
         })}
+      </HStack>
+      <HStack>
+        <Button onClick={handlePrevPage} disabled={page === 1}>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-6 w-6"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="#94a3b8"
+            strokeWidth="2"
+            width="24"
+            height="24"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M15 19l-7-7 7-7"
+              stroke="#94A3B8"
+              fill="none"
+              strokeWidth="2px"
+            ></path>
+          </svg>
+        </Button>
+        <Text whiteSpace={"nowrap"} fontSize={14}>
+          {" "}
+          Page {page} of {TOTAL_PAGES}{" "}
+        </Text>
+        <Button
+          onClick={handleNextPage}
+          disabled={page === 2 || TOTAL_PAGES === 1 ? true : false}
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-6 w-6"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="#94a3b8"
+            strokeWidth="2"
+            width="24"
+            height="24"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M9 5l7 7-7 7"
+              stroke="#94A3B8"
+              fill="none"
+              strokeWidth="2px"
+            ></path>
+          </svg>
+        </Button>
       </HStack>
     </HStack>
   );
