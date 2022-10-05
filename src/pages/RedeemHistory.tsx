@@ -8,6 +8,7 @@ import {
   CircularProgress,
 } from "@chakra-ui/react";
 import moment from "moment";
+import Footer from "../components/Footer";
 import Coin from "../components/Icons/Coin";
 import NavBar from "../components/NavBar";
 import useUserData from "../hooks/useUserData";
@@ -72,6 +73,7 @@ function RedeemHistory() {
           );
         })}
       </VStack>
+      <Footer />
     </>
   );
 }
