@@ -5,9 +5,10 @@ import MyCoins from "./MyCoins";
 import ProfileImage from "../assets/profile.jpg";
 import { useCoinsContext } from "../context/CoinsContext";
 import { Link } from "react-router-dom";
+import { CoinsContextProps } from "../types";
 
 function NavBar() {
-  const context = useCoinsContext();
+  const { userData, redeemCoins } = useCoinsContext() as CoinsContextProps;
 
   return (
     <Stack
@@ -25,12 +26,12 @@ function NavBar() {
         <Logo />
       </Link>
 
-      <MyCoins coins={context?.userData?.points} />
+      <MyCoins coins={userData?.points} />
       <Stack direction={"row"} align={"center"} gap={2}>
         <Link to="/history">
           <Text>My History</Text>
         </Link>
-        <AddCoin addCoins={context?.redeemCoins} />
+        <AddCoin addCoins={redeemCoins} />
         <Image
           src={ProfileImage}
           alt="profileImage"

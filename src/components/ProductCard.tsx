@@ -9,7 +9,7 @@ import {
 } from "@chakra-ui/react";
 import { useState } from "react";
 import { requestRedeemProducts } from "../services/postRedeemProduct";
-import { CoinsContextProps, Product } from "../types";
+import { CoinsContextProps, Product, UserData } from "../types";
 import BuyBlue from "./Icons/BuyBlue";
 import BuyWhite from "./Icons/BuyWhite";
 import MyCoins from "./MyCoins";
@@ -17,8 +17,13 @@ import MyCoins from "./MyCoins";
 interface ProductCardProp {
   productInfo: Product;
   redeemProduct: CoinsContextProps["spendCoinsToRedeem"];
+  userCoins: UserData["points"];
 }
-function ProductCard({ productInfo, redeemProduct }: ProductCardProp) {
+function ProductCard({
+  productInfo,
+  redeemProduct,
+  userCoins,
+}: ProductCardProp) {
   const [isHovered, setIsHovered] = useState<boolean>(false);
   const toast = useToast();
   const buyProduct = () => {
@@ -62,7 +67,12 @@ function ProductCard({ productInfo, redeemProduct }: ProductCardProp) {
           align={"center"}
         >
           <MyCoins coins={productInfo.cost} />
-          <Button onClick={buyProduct} w={"70%"} borderRadius={"50px"}>
+          <Button
+            onClick={buyProduct}
+            disabled={productInfo.cost > userCoins ? true : false}
+            w={"70%"}
+            borderRadius={"50px"}
+          >
             Redeem
           </Button>
         </Stack>

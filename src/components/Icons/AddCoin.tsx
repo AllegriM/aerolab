@@ -18,7 +18,11 @@ import CoinRedeemOptions from "../CoinRedeemOptions";
 
 export const COIN_OPTIONS = [1000, 5000, 7500];
 
-function AddCoin({ addCoins }: CoinsContextProps["redeemCoins"]) {
+type Props = {
+  addCoins: CoinsContextProps["redeemCoins"];
+};
+
+function AddCoin({ addCoins }: Props) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [coinsAmount, setCoinsAmount] = useState<CoinsRedeemProps["coins"]>(
     COIN_OPTIONS[0]

@@ -58,11 +58,13 @@ function Dashboard({
     <HStack
       w={"100%"}
       maxW={"1200px"}
-      justify={"space-between"}
-      py={4}
+      justify={["center", "center", "space-between"]}
+      gap={[4, 4, 0, 0]}
+      flexWrap={"wrap"}
+      p={4}
       m={"0 auto"}
     >
-      <HStack w={"100%"}>
+      <HStack>
         <Text>Filter by</Text>
         <Select
           onChange={selectCategory}
@@ -82,6 +84,8 @@ function Dashboard({
             );
           })}
         </Select>
+      </HStack>
+      <HStack>
         <Text color={"gray.400"} fontWeight={500}>
           Sort by:{" "}
         </Text>

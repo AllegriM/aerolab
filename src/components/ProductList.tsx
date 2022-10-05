@@ -2,12 +2,14 @@ import { Center, CircularProgress, List, Stack, Text } from "@chakra-ui/react";
 import React, { useState } from "react";
 import { useCoinsContext } from "../context/CoinsContext";
 import useProducts from "../hooks/useProducts";
+import useUserData from "../hooks/useUserData";
 import { CoinsContextProps } from "../types";
 import Dashboard from "./Dashboard";
 import ProductCard from "./ProductCard";
 import { FilterByCategory, FilterByPrice } from "./types";
 
 function ProductList() {
+  const { userData } = useUserData();
   const { products, status } = useProducts();
   const { spendCoinsToRedeem } = useCoinsContext() as CoinsContextProps;
   const [page, setPage] = useState<number>(1);
@@ -70,7 +72,7 @@ function ProductList() {
   }, [products, filter]);
 
   return (
-    <Stack justify="center" align="center">
+    <Stack justify={"flex-start"} align="center" minH={"80vh"}>
       {status === "pending" ? (
         <Center padding={12}>
           <CircularProgress isIndeterminate color="lightblue" />
@@ -87,10 +89,11 @@ function ProductList() {
           />
           <List
             display="grid"
-            gridTemplateColumns="repeat( auto-fit, minmax(280px, 1fr) )"
+            gridTemplateColumns="repeat( auto-fill, minmax(280px, 1fr) )"
             gap={6}
             maxW={1200}
             width={"100%"}
+            justifyItems={["center", null, null]}
           >
             {filteredCategoryProducts
               ?.slice(
@@ -103,6 +106,7 @@ function ProductList() {
                     key={product._id}
                     productInfo={product}
                     redeemProduct={spendCoinsToRedeem}
+                    userCoins={userData ? userData.points : 0}
                   />
                 );
               })}
