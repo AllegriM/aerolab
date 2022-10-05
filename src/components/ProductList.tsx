@@ -70,8 +70,10 @@ function ProductList() {
       default:
         return products;
     }
-  }, [category, filter]);
+  }, [category, filter, products]);
 
+  console.log(category);
+  console.log(filteredPriceProducts);
   return (
     <Stack justify={"flex-start"} align="center" minH={"80vh"}>
       {status === "pending" ? (
