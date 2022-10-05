@@ -60,7 +60,8 @@ function ProductList() {
         return products;
     }
   }, [products, category]);
-  React.useMemo(() => {
+
+  const filteredPriceProducts = React.useMemo(() => {
     switch (filter) {
       case "Lowest Price":
         return filteredCategoryProducts?.sort((a, b) => a.cost - b.cost);
@@ -69,7 +70,7 @@ function ProductList() {
       default:
         return products;
     }
-  }, [products, filter]);
+  }, [category, filter]);
 
   return (
     <Stack justify={"flex-start"} align="center" minH={"80vh"}>
@@ -95,7 +96,7 @@ function ProductList() {
             width={"100%"}
             justifyItems={["center", null, null]}
           >
-            {filteredCategoryProducts
+            {filteredPriceProducts
               ?.slice(
                 (page - 1) * MAX_PRODUCTS_PER_PAGE,
                 (page - 1) * MAX_PRODUCTS_PER_PAGE + MAX_PRODUCTS_PER_PAGE

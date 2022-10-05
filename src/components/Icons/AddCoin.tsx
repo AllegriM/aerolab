@@ -29,7 +29,6 @@ function AddCoin({ addCoins }: Props) {
   );
 
   const redeemCoins = () => {
-    console.log(coinsAmount);
     addCoins(coinsAmount);
     requestPoints(coinsAmount);
   };
