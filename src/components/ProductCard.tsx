@@ -5,6 +5,7 @@ import {
   Stack,
   Heading,
   Button,
+  useToast,
 } from "@chakra-ui/react";
 import { useState } from "react";
 import { requestRedeemProducts } from "../services/postRedeemProduct";
@@ -19,8 +20,16 @@ interface ProductCardProp {
 }
 function ProductCard({ productInfo, redeemProduct }: ProductCardProp) {
   const [isHovered, setIsHovered] = useState<boolean>(false);
-
+  const toast = useToast();
   const buyProduct = () => {
+    toast({
+      title: "Item purchased.",
+      description: `Purchased ${productInfo.name} with ${productInfo.cost} coins.`,
+      position: "bottom-left",
+      status: "success",
+      duration: 3000,
+      isClosable: true,
+    });
     redeemProduct(productInfo.cost);
     requestRedeemProducts(productInfo._id);
   };

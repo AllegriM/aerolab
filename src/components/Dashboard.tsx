@@ -50,6 +50,7 @@ function Dashboard({
   ];
 
   const selectCategory = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setPage(1);
     onChangeCategory(e.target.value as FilterByCategory);
   };
 

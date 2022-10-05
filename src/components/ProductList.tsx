@@ -2,13 +2,14 @@ import { Center, CircularProgress, List, Stack, Text } from "@chakra-ui/react";
 import React, { useState } from "react";
 import { useCoinsContext } from "../context/CoinsContext";
 import useProducts from "../hooks/useProducts";
+import { CoinsContextProps } from "../types";
 import Dashboard from "./Dashboard";
 import ProductCard from "./ProductCard";
 import { FilterByCategory, FilterByPrice } from "./types";
 
 function ProductList() {
   const { products, status } = useProducts();
-  const { spendCoinsToRedeem } = useCoinsContext();
+  const { spendCoinsToRedeem } = useCoinsContext() as CoinsContextProps;
   const [page, setPage] = useState<number>(1);
   const MAX_PRODUCTS_PER_PAGE = 16;
   const [category, setCategory] = useState<FilterByCategory>(

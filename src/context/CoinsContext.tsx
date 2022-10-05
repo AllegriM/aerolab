@@ -9,8 +9,13 @@ import {
 
 export const CoinsContext = createContext<CoinsContextProps | null>(null);
 
-export const useCoinsContext = () => {
+export const useCoinsContext = (): CoinsContextProps => {
   const useCoinsContext = useContext(CoinsContext);
+  if (useCoinsContext == null) {
+    throw new Error(
+      "useCoinsContext must be used within CoinsContextProvider."
+    );
+  }
   return useCoinsContext;
 };
 

@@ -1,4 +1,12 @@
-import { Image, HStack, VStack, Heading, Text } from "@chakra-ui/react";
+import {
+  Image,
+  HStack,
+  VStack,
+  Heading,
+  Text,
+  Center,
+  CircularProgress,
+} from "@chakra-ui/react";
 import moment from "moment";
 import Coin from "../components/Icons/Coin";
 import NavBar from "../components/NavBar";
@@ -6,11 +14,23 @@ import useUserData from "../hooks/useUserData";
 import { Product } from "../types";
 
 function RedeemHistory() {
-  const data = useUserData();
+  const { userData, loading } = useUserData();
   // get redeemHistory from data in recently order
-  const redeemHistory = data?.redeemHistory?.sort((a: Product, b: Product) => {
-    return new Date(b.createDate).getTime() - new Date(a.createDate).getTime();
-  });
+  const redeemHistory = userData?.redeemHistory?.sort(
+    (a: Product, b: Product) => {
+      return (
+        new Date(b.createDate).getTime() - new Date(a.createDate).getTime()
+      );
+    }
+  );
+
+  if (loading || !userData) {
+    return (
+      <Center padding={12}>
+        <CircularProgress isIndeterminate color="lightblue" />
+      </Center>
+    );
+  }
 
   return (
     <>
