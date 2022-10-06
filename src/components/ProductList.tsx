@@ -62,18 +62,19 @@ function ProductList() {
   }, [products, category]);
 
   const filteredPriceProducts = React.useMemo(() => {
+    console.log("Adentro del useMemo()");
     switch (filter) {
       case "Lowest Price":
+        console.log(filter);
         return filteredCategoryProducts?.sort((a, b) => a.cost - b.cost);
       case "Highest Price":
+        console.log(filter);
         return filteredCategoryProducts?.sort((a, b) => b.cost - a.cost);
       default:
-        return products;
+        return filteredCategoryProducts;
     }
   }, [category, filter, products]);
 
-  console.log(category);
-  console.log(filteredPriceProducts);
   return (
     <Stack justify={"flex-start"} align="center" minH={"80vh"}>
       {status === "pending" ? (
