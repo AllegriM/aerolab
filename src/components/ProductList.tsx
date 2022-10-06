@@ -74,7 +74,7 @@ function ProductList() {
         return filteredCategoryProducts;
     }
   }, [category, filter, filteredCategoryProducts]);
-
+  console.log(filteredPriceProducts);
   return (
     <Stack justify={"flex-start"} align="center" minH={"80vh"}>
       {status === "pending" ? (
