@@ -22,7 +22,6 @@ function ProductList() {
   );
 
   const filteredCategoryProducts = React.useMemo(() => {
-    console.log("products:", products);
     switch (category) {
       case "All": {
         return products;
@@ -63,7 +62,6 @@ function ProductList() {
   }, [products, category]);
 
   const filteredPriceProducts = React.useMemo(() => {
-    console.log("filteredCategoryProducts:", filteredCategoryProducts);
     switch (filter) {
       case "Lowest Price":
         return filteredCategoryProducts.sort((a, b) => a.cost - b.cost);
