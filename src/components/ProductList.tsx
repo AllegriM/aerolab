@@ -73,7 +73,7 @@ function ProductList() {
       default:
         return filteredCategoryProducts;
     }
-  }, [category, filter, products]);
+  }, [category, filter, filteredCategoryProducts]);
 
   return (
     <Stack justify={"flex-start"} align="center" minH={"80vh"}>
