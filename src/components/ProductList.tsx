@@ -22,6 +22,7 @@ function ProductList() {
   );
 
   const filteredCategoryProducts = React.useMemo(() => {
+    console.log("products:", products);
     switch (category) {
       case "All": {
         return products;
@@ -62,19 +63,17 @@ function ProductList() {
   }, [products, category]);
 
   const filteredPriceProducts = React.useMemo(() => {
-    console.log("Adentro del useMemo()");
+    console.log("filteredCategoryProducts:", filteredCategoryProducts);
     switch (filter) {
       case "Lowest Price":
-        console.log(filter);
-        return filteredCategoryProducts?.sort((a, b) => a.cost - b.cost);
+        return filteredCategoryProducts.sort((a, b) => a.cost - b.cost);
       case "Highest Price":
-        console.log(filter);
-        return filteredCategoryProducts?.sort((a, b) => b.cost - a.cost);
+        return filteredCategoryProducts.sort((a, b) => b.cost - a.cost);
       default:
         return filteredCategoryProducts;
     }
   }, [category, filter, filteredCategoryProducts]);
-  console.log(filteredPriceProducts);
+
   return (
     <Stack justify={"flex-start"} align="center" minH={"80vh"}>
       {status === "pending" ? (

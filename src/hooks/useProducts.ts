@@ -7,10 +7,11 @@ const useProducts = () => {
   const [status, setStatus] = useState<"pending" | "resolved" | "reject">(
     "pending"
   );
+
   useEffect(() => {
     getProducts()
       .then((products) => setProducts(products))
-      .catch(() => console.log("reject"))
+      .catch(() => setStatus("reject"))
       .finally(() => setStatus("resolved"));
   }, []);
 
