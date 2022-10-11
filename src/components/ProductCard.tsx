@@ -79,7 +79,7 @@ function ProductCard({
       </Stack>
       {isHovered ? <BuyWhite /> : <BuyBlue />}
       <Image
-        src={productInfo.img.hdUrl}
+        src={productInfo.img.url}
         alt={productInfo.name}
         py={2}
         m={"0 auto"}

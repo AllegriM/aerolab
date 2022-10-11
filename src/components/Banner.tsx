@@ -1,5 +1,5 @@
 import { Stack, Image, Text } from "@chakra-ui/react";
-import BannerImage from "../assets/header-x2.png";
+import BannerImage from "../assets/header-x2.jpg";
 
 function Banner() {
   return (
